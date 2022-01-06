@@ -29,9 +29,8 @@ pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
         glutenFree: req.body.glutenfree,
         specialInstructions: req.body.instructions
     }
-
+    let freeDelivery = "";
     let pizzaPrice: number = 0;
-    let freeDeliveryIsTrue: boolean = false;
 
         if (newPizza.size === "large") {
             pizzaPrice = 12 + (1.25 * newPizza.toppings);
@@ -51,10 +50,10 @@ pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
     }
 
     if (pizzaPrice >= 15) {
-        freeDeliveryIsTrue = true;
+        freeDelivery = "Because your order meets the $15.00 minimum, you get FREE DELIVERY!";
     }
 
-    res.render("custompizzaconfirmation", {newPizza, pizzaPrice, freeDeliveryIsTrue});
+    res.render("custompizzaconfirmation", {newPizza, pizzaPrice, freeDelivery});
 })
 
 pizzaRoutes.get("/review", function(req, res) {
