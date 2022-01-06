@@ -14,15 +14,13 @@ appRoutes.get("/reviewconfirmation", function(req, res) {
     res.render("reviewconfirmation");
 });
 
-appRoutes.get("/review", function(req, res) {
-    let name = req.query.name;
-    let comment = req.query.comment;
-    let rating = req.query.rating;
+appRoutes.post("/review", function(req, res) {
+    let name = req.body.name;
+    let comment = req.body.comment;
+    let rating = req.body.rating;
 
     res.render("reviewconfirmation", {name, comment, rating});
 })
-
-
 
 
 export default appRoutes;

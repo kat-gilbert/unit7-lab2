@@ -26,7 +26,7 @@ pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
         glutenFree: req.body.glutenfree,
         specialInstructions: req.body.instructions
     }
-
+    console.log(req.body.size);
     let pizzaPrice: number = 0;
     let freeDeliveryIsTrue: boolean = false;
 
@@ -51,7 +51,7 @@ pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
         freeDeliveryIsTrue = true;
     }
 
-    res.render("custompizzaconfirmation", {newPizza});
+    res.render("custompizzaconfirmation", {newPizza, pizzaPrice, freeDeliveryIsTrue});
 })
 
 
