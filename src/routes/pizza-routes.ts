@@ -24,13 +24,14 @@ pizzaRoutes.get("/custompizzaconfirmation", function(req, res) {
 
 pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
     let newPizza: BuildPizza = {
-        size: req.body.size,
+        size: req.body.size as string,
         toppings: parseFloat(req.body.toppings),
-        glutenFree: req.body.glutenfree,
-        specialInstructions: req.body.instructions
+        glutenFree: Boolean(req.body.glutenfree),
+        specialInstructions: req.body.instructions as string
     }
-    let freeDelivery = "";
+    let freeDelivery: string = "";
     let pizzaPrice: number = 0;
+    pizzaPrice.toFixed(2);
 
         if (newPizza.size === "large") {
             pizzaPrice = 12 + (1.25 * newPizza.toppings);
@@ -61,9 +62,9 @@ pizzaRoutes.get("/review", function(req, res) {
 });
 
 pizzaRoutes.post("/reviewconfirmation", function(req, res) {
-    let name:string = req.body.name as string;
-    let comment:string = req.body.comment as string;
-    let rating:string = req.body.rating as string;
+    let name: string = req.body.name as string;
+    let comment: string = req.body.comment as string;
+    let rating: string = req.body.rating as string;
 
     res.render("reviewconfirmation", {name, comment, rating});
 })
