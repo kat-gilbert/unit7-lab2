@@ -4,6 +4,10 @@ import SpecialtyPizza from "../models/specialtypizza";
 
 const pizzaRoutes = express.Router();
 
+pizzaRoutes.get("/", function(req, res){
+    res.render('home'); 
+});
+
 pizzaRoutes.get("/specialtypizza", function(req, res) {
     let pizzaName:string = req.query.name as string;
     let pizzaPrice:number = parseFloat(req.query.price as string);
@@ -19,7 +23,7 @@ pizzaRoutes.get("/custompizzaconfirmation", function(req, res) {
     res.render("custompizzaconfirmation");
 })
 
-pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
+pizzaRoutes.post("/custompizza", function(req, res) {
     let newPizza: BuildPizza = {
         size: req.body.size,
         toppings: parseFloat(req.body.toppings),
@@ -27,6 +31,7 @@ pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
         specialInstructions: req.body.instructions
     }
     console.log(req.body.size);
+
     let pizzaPrice: number = 0;
     let freeDeliveryIsTrue: boolean = false;
 
@@ -54,5 +59,21 @@ pizzaRoutes.post("/custompizzaconfirmation", function(req, res) {
     res.render("custompizzaconfirmation", {newPizza, pizzaPrice, freeDeliveryIsTrue});
 })
 
+
+pizzaRoutes.get("/review", function(req, res) {
+    res.render("review");
+});
+
+// pizzaRoutes.get("/reviewconfirmation", function(req, res) {
+//     res.render("reviewconfirmation");
+// });
+
+pizzaRoutes.post("/reviewconfirmation", function(req, res) {
+    let name:string = req.body.name as string;
+    let comment:string = req.body.comment as string;
+    let rating:string = req.body.rating as string;
+
+    res.render("reviewconfirmation", {name, comment, rating});
+})
 
 export default pizzaRoutes;
